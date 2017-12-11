@@ -8,12 +8,31 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
     <!-- 配置自定扫描的包 -->
-    <context:component-scan base-package="com.lvzu.class"></context:component-scan>
+    <context:component-scan base-package="com.lvzu"></context:component-scan>
 
     <!--&lt;!&ndash; 配置视图解析器: 如何把 handler 方法返回值解析为实际的物理视图 &ndash;&gt;-->
     <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
         <!--<property name="prefix" value="/WEB-INF/views/"></property>-->
         <!--<property name="suffix" value=".jsp"></property>-->
     <!--</bean>-->
+
+
+
+    <!--两个标准配置  -->
+    <!-- 将springmvc不能处理的请求交给tomcat -->
+    <mvc:default-servlet-handler/>
+    <!-- 能支持springmvc更高级的一些功能，JSR303校验，快捷的ajax...映射动态请求 -->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg index="0">
+                    <bean class="java.nio.charset.Charset" factory-method="forName">
+                        <constructor-arg value="utf-8"/>
+                    </bean>
+                </constructor-arg>
+            </bean>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
 </beans>

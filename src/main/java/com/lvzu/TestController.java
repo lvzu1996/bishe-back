@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author tyq
+ * @author lvzu
  * @version 1.0, 2017/12/6
  */
 @Controller
@@ -29,7 +29,7 @@ public class TestController {
     public Map<String, String> testRestGet(@PathVariable("id") Integer id){
         testService.test();
         System.out.println("rest 风格的GET请求..........id=" +id);
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<String,String>();
         map.put("success", "true");
         map.put("data", id.toString());
         return map;
